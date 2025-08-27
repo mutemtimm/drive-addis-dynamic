@@ -95,7 +95,7 @@ const PricingSection = () => {
           {pricingPlans.map((plan, index) => (
             <div
               key={plan.name}
-              className={`bg-card rounded-3xl shadow-soft hover-lift group relative overflow-hidden section-fade ${isVisible ? 'visible' : ''} ${
+              className={`bg-card rounded-3xl shadow-soft hover-lift card-glow group relative overflow-hidden section-fade ${isVisible ? 'visible' : ''} ${
                 plan.isPopular 
                   ? 'ring-2 ring-accent shadow-accent scale-105 transform' 
                   : ''

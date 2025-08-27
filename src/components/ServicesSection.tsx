@@ -95,7 +95,7 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`bg-card rounded-2xl p-8 shadow-soft hover-lift group section-fade ${isVisible ? 'visible' : ''}`}
+              className={`bg-card rounded-2xl p-8 shadow-soft hover-lift card-glow group section-fade ${isVisible ? 'visible' : ''}`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}

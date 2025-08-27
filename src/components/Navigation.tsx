@@ -50,14 +50,16 @@ const Navigation = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md shadow-soft' : 'bg-transparent'
+      isScrolled ? 'bg-background/95 backdrop-blur-md shadow-soft' : 'bg-gradient-hero backdrop-blur-sm shadow-medium'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <img src={logo} alt="Dynamic Driving Licence" className="h-8 w-8" />
-            <div className="text-xl font-bold text-primary font-display">
+            <div className={`text-xl font-bold font-display transition-smooth ${
+              isScrolled ? 'text-primary' : 'text-primary-foreground'
+            }`}>
               Dynamic Driving Licence
             </div>
           </div>
@@ -70,8 +72,8 @@ const Navigation = () => {
                 onClick={() => scrollToSection(item.href)}
                 className={`nav-link px-3 py-2 text-sm font-medium transition-smooth ${
                   activeSection === item.id 
-                    ? 'text-primary active' 
-                    : 'text-foreground hover:text-primary'
+                    ? (isScrolled ? 'text-primary active' : 'text-accent active')
+                    : (isScrolled ? 'text-foreground hover:text-primary' : 'text-primary-foreground hover:text-accent')
                 }`}
               >
                 {item.label}
@@ -89,7 +91,7 @@ const Navigation = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground"
+              className={isScrolled ? "text-foreground" : "text-primary-foreground"}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>

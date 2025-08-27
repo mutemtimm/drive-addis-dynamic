@@ -73,13 +73,27 @@ const ContactSection = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Real-time validation
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: !validateField(name, value)
-      }));
+    // Real-time validation with visual feedback
+    const isValid = validateField(name, value) && value.trim() !== '';
+    const element = e.target;
+    
+    // Remove previous classes
+    element.classList.remove('field-valid', 'field-invalid');
+    
+    // Add appropriate class based on validation
+    if (value.trim() !== '') {
+      if (isValid) {
+        element.classList.add('field-valid');
+      } else {
+        element.classList.add('field-invalid');
+      }
     }
+    
+    // Update errors state
+    setErrors(prev => ({
+      ...prev,
+      [name]: value.trim() !== '' && !isValid
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -163,7 +177,7 @@ const ContactSection = () => {
               {contactInfo.map((info, index) => (
                 <div 
                   key={info.title}
-                  className="bg-card rounded-xl p-6 shadow-soft hover-lift group"
+                  className="bg-card rounded-xl p-6 shadow-soft hover-lift card-glow group"
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-accent/10 text-accent rounded-full flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition-smooth">
